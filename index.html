@@ -47,10 +47,32 @@
         .flex-item-bottom {
             background-color: forestgreen;
             padding: 0px;
-            height: 100vh;
+            height: 80vh;
             flex: 50%;
+            display: flex;
+            flex-direction: column;
         }
 
+        /* Fixed controls container */
+        .controls-container {
+            position: relative;
+            padding: 20px;
+            margin-top: auto;
+            background-color: forestgreen;
+            font-size: 16px; /* Fixed font size for controls */
+        }
+
+        .controls-container label,
+        .controls-container span {
+            font-size: 16px !important; /* Override any inherited font-size changes */
+        }
+
+        /* Text editor container that can grow/shrink */
+        .text-editor-container {
+            flex: 1;
+            padding: 20px;
+            overflow: hidden;
+        }
 
         @media (max-width: 800px) {
             .flex-container {
@@ -92,8 +114,6 @@
             line-height: .920em;
             text-align: center;
             word-break: break-all;
-
-
         }
 
         .tonga span {
@@ -114,11 +134,17 @@
         .texttester {
             font-family: "Tonga", sans-serif;
             font-variation-settings: "wght" var(--charge);
-            font-size: 250px;
-            display: block;
             font-size: var(--font-size);
+            display: block;
             transition: font-size 0.3s;
-
+            width: 100%;
+            min-height: 200px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: inherit;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         input[type="range"] {
@@ -127,7 +153,6 @@
             width: 200px;
             height: 10px;
             background: var(--range-color, #ccc);
-            /* Default color */
             border-radius: 5px;
             outline: none;
             opacity: 0.7;
@@ -146,14 +171,12 @@
 
         input[type="range"]::-webkit-slider-runnable-track {
             background: var(--range-color, #ccc);
-            /* Dynamic color */
             height: 10px;
             border-radius: 5px;
         }
 
         input[type="range"]::-moz-range-track {
             background: var(--range-color, #ccc);
-            /* Dynamic color */
             height: 10px;
             border-radius: 5px;
         }
@@ -194,7 +217,6 @@
             onmouseenter="toggleMyVariableClass(this)">-</span><span
             onmouseenter="toggleMyVariableClass(this)">-</span><span onmouseenter="toggleMyVariableClass(this)">-</span>
         <br>
-
 
         <span onmouseenter="toggleMyVariableClass(this)">a</span><span
             onmouseenter="toggleMyVariableClass(this)">b</span><span
@@ -287,16 +309,17 @@
         </div>
     </div>
 
-
     <div class="flex-container">
         <div class="flex-item-bottom">
-            <p class="texttester" contenteditable="plaintext-only">type your text here.....</p>
+            <div class="text-editor-container">
+                <p class="texttester" contenteditable="plaintext-only">type your text here.....</p>
+            </div>
 
-            <div>
+            <div class="controls-container">
                 <!-- Charge Slider -->
                 <label for="charge"> weight <span id="current-charge">0</span></label>
                 <input name="charge" type="range" min="0" max="100" value="0" oninput="setCharge(this.value)">
-                <br><br>
+                
                 <!-- Size Slider -->
                 <label for="size">Font Size <span id="current-size">30</span>px</label>
                 <input name="size" type="range" min="10" max="100" value="30" oninput="setSize(this.value)">
@@ -326,10 +349,8 @@
                 // Change the size CSS variable
                 function setSize(newSize) {
                     console.log(newSize);
-                    currentSize.innerText = newSize; // 
+                    currentSize.innerText = newSize; 
                     document.documentElement.style.setProperty('--font-size', `${newSize}px`);
-
-
                 }
             </script>
         </div>
@@ -339,16 +360,11 @@
         <div class="flex-item-left"> <img src="tonga-test-09.svg"></div>
         <div class="flex-item-right"> <img src="tonga-test-10.svg"></div>
     </div>
-    </div>
 
     <img src="tonga-test n.svg">
     <h1>..............................................<br><strong>be bold, be brave enough <br>to be your true
             self</strong><br>...............................................</h1>
     <img src="tonga-test bp.svg">
-
-
-
-
 
     <!-- JavaScript goes in the <script> element -->
     <script>
